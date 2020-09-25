@@ -1,7 +1,6 @@
 // Предварительно установленную дату взяла 31 декабря 2020 года
 // количество знаков оставшихся дней определила 3 (потому что в году не более 366 дней)
 // Не могу понять зачем в условии указан selector: '#timer-1', зачем/где его использовать?????
-// Не удалось сделать очисту clearInterval
 
 const daysRef = document.querySelector('span[data-value="days"]');
 const hoursRef = document.querySelector('span[data-value="hours"]');
@@ -17,18 +16,14 @@ class CountdownTimer {
   startInterval = setInterval(() => {
     const currentDate = Date.now();
     const time = this.targetDate.getTime() - currentDate;
-    // разница между установленной будущей датой и текущим временем
 
     updateTime(time);
-  }, 1000);
 
-  stopInterval() {
-    // Пытаюсь сделать условие остановки setInterval. Не выходит, идёт отсчёт в минус, не находит intervalId в 27 строке
     if (time <= 0) {
-      clearInterval(startInterval);
+      clearInterval(this.startInterval);
       updateTime(0);
     }
-  }
+  }, 1000);
 }
 
 function updateTime(time) {
